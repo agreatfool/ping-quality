@@ -62,7 +62,7 @@ const pingDataHandler = (data) => {
     delay = parseInt(origin[6].split("=")[1]); //  time=70.087 => [ "time", "70.087" ]
   }
 
-  let failureRate = parseInt(TIMEOUT_COUNT / LOOP_COUNT * 100);
+  let failureRate = (TIMEOUT_COUNT / LOOP_COUNT * 100).toFixed(2);
   let duration = ((new Date() - START_TIME) / 1000 / 3600).toFixed(2); // / 1000 => to second, / 3600 => to hour
 
   console.log(`${IP}\t${delay}ms\tFail: ${failureRate}%\tTimeout: ${TIMEOUT_COUNT}\tTotal: ${LOOP_COUNT}\tDuration: ${duration} Hr`);
