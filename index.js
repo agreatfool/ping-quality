@@ -65,7 +65,7 @@ const pingDataHandler = (data) => {
   let failureRate = (TIMEOUT_COUNT / LOOP_COUNT * 100).toFixed(2);
   let duration = ((new Date() - START_TIME) / 1000 / 3600).toFixed(2); // / 1000 => to second, / 3600 => to hour
 
-  console.log(`${IP}\t${delay}ms\tFail: ${failureRate}%\tTimeout: ${TIMEOUT_COUNT}\tTotal: ${LOOP_COUNT}\tDuration: ${duration} Hr`);
+  console.log(`${IP}\t${delay}ms\tFail: ${failureRate}%\tTimeout: ${TIMEOUT_COUNT}\tTotal: ${LOOP_COUNT}\tDuration: ${duration} Hr\tTime: ${moment().format("YYYY-MM-DD HH:mm:ss")}`);
 };
 
 const rl = readline.createInterface({
