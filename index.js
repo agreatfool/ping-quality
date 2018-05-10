@@ -52,7 +52,7 @@ const pingDataHandler = (data) => {
     // timeout
     TIMEOUT_COUNT++;
 
-    logTimeout();
+    // logTimeout(); // IP search service terminated, so do not log anymore, 20180510
   } else {
     // data => "64 bytes from X.X.X.X: icmp_seq=45021 ttl=47 time=70.087 ms"
     // normal ping response
@@ -76,25 +76,26 @@ rl.on("line", pingDataHandler);
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 //- IP GEO LISTENER
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-setInterval(() => {
-  let options = {
-    method: "GET"
-  };
-  if (process.env.HTTP_PROXY) {
-    options.agent = new HttpsProxyAgent(process.env.HTTP_PROXY);
-  }
-
-  fetch("http://freegeoip.net/json/", options).then((response) => { // get the info of current using network
-    return response.json();
-  }).then((json) => {
-    LOCATION.ip = json.ip;
-    LOCATION.country_name = json.country_name;
-    LOCATION.region_name = json.region_name;
-    console.log("Current Network info refreshed: ", json);
-  }).catch((err) => {
-    console.log("IP fetch failed: ", err);
-  });
-}, 60 * 1000); // 60s
+// IP search service terminated, do not fetch anymore, 20180510
+// setInterval(() => {
+//   let options = {
+//     method: "GET"
+//   };
+//   if (process.env.HTTP_PROXY) {
+//     options.agent = new HttpsProxyAgent(process.env.HTTP_PROXY);
+//   }
+//
+//   fetch("http://freegeoip.net/json/", options).then((response) => { // get the info of current using network
+//     return response.json();
+//   }).then((json) => {
+//     LOCATION.ip = json.ip;
+//     LOCATION.country_name = json.country_name;
+//     LOCATION.region_name = json.region_name;
+//     console.log("Current Network info refreshed: ", json);
+//   }).catch((err) => {
+//     console.log("IP fetch failed: ", err);
+//   });
+// }, 60 * 1000); // 60s
 
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 //- TIMEOUT LOG LISTENER
